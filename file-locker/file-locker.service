@@ -1,0 +1,12 @@
+[Unit]
+Description=Locks history files in home directories
+
+[Service]
+Restart=always
+Type=simple
+ExecStart=/opt/file-locker.sh
+MemoryMax=128MB
+TasksMax=128
+
+[Install]
+WantedBy=multi-user.target
