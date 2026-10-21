@@ -16,10 +16,10 @@ grep -qE '^.+:0:' /etc/passwd && group='shadow'
 # path, owner, octal perm, attribute
 metamod() {
 	# Change its permissions & attributes based on the given options
-	echo "\"${1}\" was flagged."
-	chown -- "${2}" "${1}"
-	chmod -- "${3}" "${1}"
-	chattr -- +"${4}" "${1}"
+	chown -c -- "${2}" "${1}"
+	chmod -c -- "${3}" "${1}"
+	chattr -V -- +"${4}" "${1}"
+	echo "${1@Q} was flagged."
 }
 #
 # Helper function to (mon)itor (file)s
