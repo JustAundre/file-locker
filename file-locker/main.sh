@@ -24,11 +24,11 @@ metamod() {
 #
 # Helper function to (mon)itor (file)s
 filemon() {
-	while IFS='' read -r -d '' file; do
+	inotifywait --includei "${2}" --format '%w%f%0' -q -m -r -P -e attrib -e move -e create -- "${1}" | while IFS='' read -r -d '' file; do
 		# Ensure the path isn't a directory
 		# Ampersand (&) placed at the end of metamod to prevent it from bottle-necking.
 		[[ -f ${file} ]] && metamod "${file}" "${3}" "${4}" "${5}" &
-	done < <(inotifywait --includei "${2}" --format '%w%f%0' -q -m -r -P -e attrib -e move -e create -- "${1}")
+	done
 }
 
 
